@@ -38,3 +38,5 @@ Q.idea/sonarlint/securityhotspotstore/d/2/d2a4383452aad84a18429a5844d31330a012a9
 Q.idea/sonarlint/securityhotspotstore/c/3/c3a1901977c0662832c2e5ebde38582a8437707a,3/5/3509c469d755b5f4358e49085b2be071e80f507b
 Å
 Q.idea/sonarlint/securityhotspotstore/d/8/d8b93ac46835940d2cb6c5001510026183950c74,8/9/89ea8e156c44a625f711d0de7288abd3c7928d63
+H
+app/google-services.json,f/d/fd8d34b142d02ec743a8efefefd2c097961666e9

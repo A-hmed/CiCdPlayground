@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "945293626853",
+    "project_id": "playground-f61ad",
+    "storage_bucket": "playground-f61ad.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:945293626853:android:622ac40855c5d81c8d330c",
+        "android_client_info": {
+          "package_name": "com.kazyon.cicdplayground"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcod8IjZSgQFgHXKq5ZP4Wk9s-_u9E9bg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
