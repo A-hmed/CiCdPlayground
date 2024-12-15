@@ -1,0 +1,138 @@
+name: Build testing APK
+
+on:
+  push:
+    branches:
+      - master
+#  workflow_dispatch:
+#    inputs:
+#      release_notes:
+#        type: string
+#        description: 'enter release notes'
+#        required: true
+#      tester_group:
+#        type: string
+#        description: 'enter tester group name'
+#        required: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checking out branch
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'corretto'
+          java-version: '17'
+
+#      - name: Setup Android SDK
+#        uses: android-actions/setup-android@v2.0.10
+
+      - name: Build Release APK
+        run: ./gradlew app:bundleRelease
+          #jobs:
+          #  build:
+          #
+          #    runs-on: windows-latest
+          #
+          #    steps:
+          #    - uses: actions/checkout@v4
+          #    - name: Setup JDK
+          #      uses: actions/setup-java@v4
+          #      with:
+          #          distribution: temurin
+          #          java-version: 8
+          #          cache: 'gradle'
+          #
+          #            # Set up CMake
+          #
+          #    - name: Change wrapper permissions
+          #      run: chmod +x ./gradlew
+          #
+          #    - name: Clean and Build
+          #      run: ./gradlew clean build --warning-mode all --stacktrace
+          #
+          #    - name: Build Release APK
+          #      run: ./gradlew app:bundleRelease
+          #
+          #    - name: Find APK
+          #      id: find-apk
+          #      run: |
+          #          echo "::set-output name=apk_path::$(find . -name 'your-app-release-*.apk' -print)"
+          #          working-directory: app/build/outputs/bundle/release
+          #
+          #    - name: Display APK Path
+          #      run: echo "APK Path:${{ steps.find-apk.outputs.apk_path }}"
+
+          # - name: upload artifact to Firebase App Distribution
+          #   uses: wzieba/Firebase-Distribution-Github-Action@v1.5.1
+          #   with:
+          #     appId: ${{secrets.FIREBASE_APP_ID}}
+          #     serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
+          #     groups: Test
+          #     file: app\build\outputs\apk\release\KPlus_LIVE.apk
+          #   stage:
+          # #      if: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
+          #      name: Generate Staging APK
+          #      runs-on: ubuntu-latest
+          #      steps:
+          #          - uses: actions/checkout@v2.4.0
+          #          - name: Setup JDK
+          #            uses: actions/setup-java@v2.5.0
+          #            with:
+          #              distribution: temurin
+          #              java-version: '11'
+          #          - name: build Stage
+          #            run: bash ./gradlew assembleStaging
+          #            # 4
+          #          - uses: actions/upload-artifact@master
+          #            with:
+          #               name: ${{ env.stage_name }}.apk
+          #               path: app/build/outputs/apk/staging/${{ env.stage_name }}.apk
+          #            # 5
+          #          - uses: actions/upload-artifact@master
+          #            with:
+          #               name: mapping.txt
+          #               path: app/build/outputs/mapping/release/mapping.txt
+
+
+          #   deploy-firebase:
+          #     # 1
+          #     if: success()
+          #     needs: stage
+          #     name: Upload Stage Apk to App tester
+          #     runs-on: ubuntu-latest
+          #     steps:
+          #         # 2
+          #       - uses: actions/download-artifact@master
+          #         with:
+          #           name: ${{ env.stage_name }}.apk
+          #         # 3
+          #       - name: upload artifact to Firebase App Distribution
+          #         uses: wzieba/Firebase-Distribution-Github-Action@v1.4.0
+          #         with:
+          #           appId: ${{secrets.FIREBASE_APP_ID}}
+          #           token: ${{secrets.FIREBASE_TOKEN}}
+          #           releaseNotes: ${{github.event.inputs.release_notes}}
+          #           groups: ${{github.event.inputs.tester_group}}
+          #           file: ${{ env.stage_name }}.apk
+
+      #   notify-slack:
+      #     if: success() || failure()
+      #     name: Notify on Slack
+      #     needs: deploy-firebase
+      #     runs-on: ubuntu-latest
+      #     steps:
+      #       - uses: act10ns/slack@v1
+      #         with:
+      #          webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
+      #          status: ${{ job.status }}
+      #          config: .github/config/slack.yml
+      # #          steps: ${{ toJson(steps) }}
+      #          channel: ${{ env.channel_id }}
+      #          message: Deploying {{ env.GITHUB_REF_NAME }} branch
+      #          if: always()
+      
